@@ -10,7 +10,9 @@ gem install deploy_mongo
 
 Usage
 ======
-deploy_mongo 'path/to/mongodb.yml'
+deploy_mongo 'path/to/mongodb.yml' [rollback]
+
+[rollback] rollbacks all the deltas
 
 
 Example
@@ -29,12 +31,13 @@ mongo_shell_path: < full path to mongo shell (can be found in mongodb install fo
 
 Delta File name format
 =======================
-<Delta Number>_<Description>.yml
-example 1_add_address_to_customer.yml
+<Delta Number>_<Description>.js
+example 1_add_address_to_customer.js
 
 
 Delta File content format
 =========================
-command: <command used to modify database>
-rollback_command: <rollback command used when rolling back applied delta.>
+<command used to modify database>
+//@undo
+<rollback command used when rolling back applied delta.>
 

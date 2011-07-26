@@ -38,20 +38,22 @@ module DeployMongo
       deltas
     end
     
-    def rollback
+    def rollback (no_of_deltas_to_rollback = 0)
+      
       repository = Repository.new(@config)
       delta_loader = DeltaLoader.new(@config.delta_path)
       deltas_map = delta_loader.get_deltas
       couch_schema = DbSchema.load_or_create(@config,repository)
       applied_deltas = couch_schema.applied_deltas.sort.reverse
+      no_of_deltas_to_rollback = applied_deltas.length if no_of_deltas_to_rollback == 0
     
       deltas = []
       puts "Already applied deltas #{applied_deltas}"
-      puts "Rolling back deltas #{applied_deltas}"
+      puts "Rolling back deltas #{applied_deltas[0..(no_of_deltas_to_rollback-1)]}"
       puts ""
       puts "Start rolling back deltas"
     
-      applied_deltas.each do |key|
+      applied_deltas[0..(no_of_deltas_to_rollback-1)].each do |key|
         delta = deltas_map[key]
         DeltaProcessor.new(@config,delta).rollback
         couch_schema.rollback(delta)

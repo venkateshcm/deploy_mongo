@@ -14,11 +14,6 @@ module DeployMongo
       self
     end
   
-    def with_schema(schema_json)
-      @schema = schema_json
-      self
-    end
-  
     def build
       mongo_shell = MongoShell.new(@database)
       mongo_shell.execute("db.dropDatabase();")
@@ -27,7 +22,6 @@ module DeployMongo
         json = JSON.generate(h)
         mongo_shell.execute("db.#{@doc_type}.save(#{json})")
       end
-      mongo_shell.execute("db.schema.save(#{@schema})")   if @schema
     end    
   end
 
