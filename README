@@ -1,0 +1,40 @@
+deploy_mongo
+=============
+deploy_mongo is db deploy tool for mongodb. 
+
+
+How to install
+=================
+gem install deploy_mongo
+
+
+Usage
+======
+deploy_mongo 'path/to/mongodb.yml'
+
+
+Example
+=======
+deploy_mongo/spec/mongodb.yml         for mongodb.yml config file
+deploy_mongo/spec/integration/deltas  for delta files
+
+
+Config Parameters
+==================
+hostname: <couchdb database server hostname>
+port: <couchdb server port number , by default 5984>
+delta_path: < path/to/deltas folder relative to configdb.yml>
+database: <couchdb database name>
+mongo_shell_path: < full path to mongo shell (can be found in mongodb install folder/bin )>
+
+Delta File name format
+=======================
+<Delta Number>_<Description>.yml
+example 1_add_address_to_customer.yml
+
+
+Delta File content format
+=========================
+command: <command used to modify database>
+rollback_command: <rollback command used when rolling back applied delta.>
+

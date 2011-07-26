@@ -1,0 +1,5 @@
+hostname: localhost
+port: 27017
+delta_path: "integration/deltas"
+database: "test"
+mongo_shell_path: "/Users/admin/work/mongodb-osx-x86_64-1.8.2/bin/mongo"

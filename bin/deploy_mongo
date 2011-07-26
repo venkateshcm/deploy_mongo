@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+if (ARGV.length != 1)
+  puts "usage: deploy_mongo 'path/to/mongodb.yml' "
+  exit(-1)
+end
+if (!File.exists?(ARGV[0]))
+  puts "file '#{ARGV[0]}' does not exist "
+  exit(-1)
+end
+
+require 'deploy_mongo'
+
+config = DeployMongo::Config.create_from_file(ARGV[0])
+deploy = DeployMongo::Deploy.new(config)
+deploy.run
