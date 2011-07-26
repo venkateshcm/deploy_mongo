@@ -10,7 +10,7 @@ gem install deploy_mongo
 
 Usage
 ======
-deploy_mongo 'path/to/mongodb.yml' [rollback]
+deploy_mongo 'path/to/mongodb.yml' [rollback:(1|2|3|..|all)]
 
 [rollback] rollbacks all the deltas
 
