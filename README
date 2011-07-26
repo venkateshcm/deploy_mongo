@@ -12,7 +12,7 @@ Usage
 ======
 deploy_mongo 'path/to/mongodb.yml' [rollback:(1|2|3|..|all)]
 
-[rollback] rollbacks all the deltas
+[rollback:all] rollbacks all the deltas
 
 
 Example
