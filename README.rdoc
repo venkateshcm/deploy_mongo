@@ -46,7 +46,7 @@ deploy_mongo is db deploy tool for mongodb.
 
 == Delta File examples
 
-==== 1_add_address_to_customer.js Example for adding address field to all customers
+==== Example for adding address field to all customers (1_add_address_to_customer.js)
 
      db.customer.update({},{$set: {"address": "some address" } } , false , true );
 
@@ -54,7 +54,7 @@ deploy_mongo is db deploy tool for mongodb.
 
      db.customer.update({},{$unset: {"address": 1}},false,true);
 
-==== 2_add_phone_to_customer.js Example for modifying phone number of all customers
+==== Example for modifying phone number of all customers (2_add_phone_to_customer.js)
 
      db.customer.update({},{$set: {"phone": "897907979" } } , false , true )
 
@@ -62,20 +62,20 @@ deploy_mongo is db deploy tool for mongodb.
 
      db.customer.update({},{$unset: {"phone": 1}},false,true)
 
-==== 13_copy_and_create_new_customer.js Example for creating new document after copying details from another customer     
+==== Example for creating new document after copying details from another customer (13_copy_and_create_new_customer.js)
 
      db.customer.find({ "name" : "name_2" }).forEach(create_customer); 
      function create_customer(doc){
-	          delete doc._id;
-	          doc.name = "new name"; 
-	          db.customer.save(doc);
+              delete doc._id;
+              doc.name = "new name"; 
+              db.customer.save(doc);
       }
 
       //@undo
 
       db.customer.remove({"name" : "new name"})
 
-==== 12_delete_customer_with_name_equal_to_name_1.js Example for deleteing a document
+==== Example for deleteing a document (12_delete_customer_with_name_equal_to_name_1.js)
 
      db.customer.remove({ "name" : "name_1" });
 
