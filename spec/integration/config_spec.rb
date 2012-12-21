@@ -19,7 +19,7 @@ module DeployMongo
     end
 
     it "should load mongo shell path" do
-      Config.create_from_file(File.dirname(__FILE__) + '/../mongodb.yml').mongo_shell_path.should == "/Users/admin/work/mongodb-osx-x86_64-1.8.2/bin/mongo"
+      Config.create_from_file(File.dirname(__FILE__) + '/../mongodb.yml').mongo_shell_path.should_not == ""
     end
 
     it "should merge config with passed in values" do

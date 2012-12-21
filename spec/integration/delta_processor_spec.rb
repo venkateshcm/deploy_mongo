@@ -6,7 +6,8 @@ module DeployMongo
   describe DeltaProcessor, "integration" do  
   
     before :all do
-      DatabasePopulator.new("test").with_type("customer").with_records(30).build
+      config = Config.create_from_file(File.dirname(__FILE__) + '/../mongodb.yml')
+      DatabasePopulator.new(config.database,config.mongo_shell_path).with_type("customer").with_records(30).build
     end
   
       

@@ -5,7 +5,8 @@ module DeployMongo
   describe Repository, "execute a delta" do
   
     before :all do
-      DatabasePopulator.new("test").with_type("customer").with_records(1).build
+      config = Config.create_from_file(File.dirname(__FILE__) + '/../mongodb.yml')
+      DatabasePopulator.new(config.database,config.mongo_shell_path).with_type("customer").with_records(1).build
     end
     
    it "create schema document if it does not exist and get schema to verify" do

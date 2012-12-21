@@ -1,13 +1,14 @@
 module DeployMongo
     class MongoShell
 
-      def initialize(database)
+      def initialize(database,mongo_shell_path)
         @database = database
+        @mongo_shell_path = mongo_shell_path
       end
   
       def execute(command)
         command = command.gsub("'","''")
-        mongo_command = "/Users/admin/work/mongodb-osx-x86_64-1.8.2/bin/mongo #{@database} --eval '#{command}'"
+        mongo_command = "#{@mongo_shell_path} #{@database} --eval '#{command}'"
         #puts mongo_command
         `#{mongo_command}`
         raise "error"  if ($?.to_i != 0)

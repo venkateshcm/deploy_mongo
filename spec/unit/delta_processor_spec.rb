@@ -5,7 +5,8 @@ module DeployMongo
   describe DeltaProcessor, "execute a delta" do
     it "should apply delta" do
       mock_shell = mock(MongoShell)
-      MongoShell.should_receive(:new).with('test').and_return(mock_shell)
+      MongoShell.should_receive(:new)
+                .with(get_couchdb_config.database,get_couchdb_config.mongo_shell_path).and_return(mock_shell)
       
       command= 'db.customer.update({},{$set: {"address": "some address" } } , false , true )'
       rollback_command= 'db.customer.update({},{$unset: {"address": 1}},false,true)'
@@ -19,7 +20,8 @@ module DeployMongo
 
     it "should rollback delta" do
       mock_shell = mock(MongoShell)
-      MongoShell.should_receive(:new).with('test').and_return(mock_shell)
+      MongoShell.should_receive(:new)
+      .with(get_couchdb_config.database,get_couchdb_config.mongo_shell_path).and_return(mock_shell)
       
       command= 'db.customer.update({},{$set: {"address": "some address" } } , false , true )'
       rollback_command= 'db.customer.update({},{$unset: {"address": 1}},false,true)'

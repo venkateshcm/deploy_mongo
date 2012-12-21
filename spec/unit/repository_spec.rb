@@ -7,7 +7,7 @@ module DeployMongo
         it "get schema document" do
            schema =  {"_id"=>"special_key","type"=>"__schema__", 'applied_deltas'=>[1,2], "type_versions"=>{"customer"=>10}}
            mock_server = mock(Mongo::Connection)
-           Mongo::Connection.should_receive(:new).with("localhost",27017).and_return(mock_server)
+           Mongo::Connection.should_receive(:new).with("localhost",27017,:safe=>true).and_return(mock_server)
            mock_db = mock(Mongo::DB)
            mock_server.should_receive(:db).with("test").and_return(mock_db)
            mock_collection = mock(Mongo::Collection)
@@ -22,7 +22,7 @@ module DeployMongo
          it "save schema document without id" do
             schema =  {"type"=>"__schema__", 'applied_deltas'=>[1,2], "type_versions"=>{"customer"=>10}}
             mock_server = mock(Mongo::Connection)
-            Mongo::Connection.should_receive(:new).with("localhost",27017).and_return(mock_server)
+            Mongo::Connection.should_receive(:new).with("localhost",27017,:safe=>true).and_return(mock_server)
             mock_db = mock(Mongo::DB)
             mock_server.should_receive(:db).with("test").and_return(mock_db)
             mock_collection = mock(Mongo::Collection)
@@ -37,7 +37,7 @@ module DeployMongo
           it "save schema document with id" do
              schema =  {"_id" => "schema__schema_document_key__", "type"=>"__schema__", 'applied_deltas'=>[1,2], "type_versions"=>{"customer"=>10}}
              mock_server = mock(Mongo::Connection)
-             Mongo::Connection.should_receive(:new).with("localhost",27017).and_return(mock_server)
+             Mongo::Connection.should_receive(:new).with("localhost",27017,:safe=>true).and_return(mock_server)
              mock_db = mock(Mongo::DB)
              mock_server.should_receive(:db).with("test").and_return(mock_db)
              mock_collection = mock(Mongo::Collection)

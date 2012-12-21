@@ -6,7 +6,8 @@ module DeployMongo
   describe Deploy, "load and execute deltas first database" do
   
     before :all do
-      DatabasePopulator.new("test").with_type("customer").with_records(30).build
+      config = Config.create_from_file(File.dirname(__FILE__) + '/../mongodb.yml')
+      DatabasePopulator.new(config.database,config.mongo_shell_path).with_type("customer").with_records(30).build
     end
   
     it "load and execute deltas" do    
@@ -22,7 +23,8 @@ module DeployMongo
   describe Deploy, "execute deltas and rollback all deltas" do
   
     before :all do
-      DatabasePopulator.new("test").with_type("customer").with_records(30).build
+      config = Config.create_from_file(File.dirname(__FILE__) + '/../mongodb.yml')
+      DatabasePopulator.new(config.database,config.mongo_shell_path).with_type("customer").with_records(30).build
     end
   
     it "load and execute deltas" do    
@@ -38,7 +40,8 @@ module DeployMongo
   describe Deploy, "execute deltas and rollback only 2 deltas" do
   
     before :all do
-      DatabasePopulator.new("test").with_type("customer").with_records(30).build
+      config = Config.create_from_file(File.dirname(__FILE__) + '/../mongodb.yml')
+      DatabasePopulator.new(config.database,config.mongo_shell_path).with_type("customer").with_records(30).build
     end
   
     it "load and execute deltas" do    

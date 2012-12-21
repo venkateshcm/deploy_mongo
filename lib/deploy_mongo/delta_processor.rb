@@ -8,13 +8,13 @@ module DeployMongo
   
     def apply
       user_command = @delta.command.gsub("'","''")
-      shell = MongoShell.new(@config.database)
+      shell = MongoShell.new(@config.database,@config.mongo_shell_path)
       shell.execute(user_command)
     end
     
     def rollback
       user_rollback_command = @delta.rollback_command.gsub("'","''")
-      shell = MongoShell.new(@config.database)
+      shell = MongoShell.new(@config.database,@config.mongo_shell_path)
       shell.execute(user_rollback_command)
     end
   end

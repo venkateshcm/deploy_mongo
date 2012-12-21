@@ -8,13 +8,13 @@ module DeployMongo
     end
   
     def get_schema
-      db = Mongo::Connection.new(@config.hostname,@config.port).db(@config.database)
+      db = Mongo::Connection.new(@config.hostname,@config.port,:safe => true).db(@config.database)
       schema = db.collection("schema").find_one("_id" => "schema__schema_document_key__")
       schema
     end
 
     def save_schema(json)
-      db = Mongo::Connection.new(@config.hostname,@config.port).db(@config.database)
+      db = Mongo::Connection.new(@config.hostname,@config.port,:safe => true).db(@config.database)
       json = json.merge("_id" => "schema__schema_document_key__")
       db.collection("schema").save(json)
     end
